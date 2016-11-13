@@ -1,0 +1,5 @@
+add test framework for node
+learn how to create node services
+learn how to query CB
+see if motion detection device can send message to url
+see if light can be turned on remotely

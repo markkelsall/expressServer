@@ -5,7 +5,7 @@ let router = express.Router();
 
 exports.start = (serverConfig) => {
     let port = serverConfig.port || 8080;
-    let address = serverConfig.address || '/';
+    let address = serverConfig.address;
 
     app.listen(port);
     console.log('Server started on ' + port);
