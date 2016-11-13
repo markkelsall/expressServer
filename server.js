@@ -6,17 +6,25 @@ let router = express.Router();
 exports.start = (serverConfig) => {
     let port = serverConfig.port || 8080;
     let address = serverConfig.address;
+    let routes = serverConfig.routes;
 
     app.listen(port);
-    console.log('Server started on ' + port);
-    console.log('address: ' + address);
+    console.log('Server started on: ' + port);
+    console.log('app address: ' + address);
 
-    router.get('/', function(req, res) {
-        res.send('im the home page!');
-    });
-
-    router.get('/about', function(req, res) {
-        res.send('im the about page!');
+    routes.forEach((route) => {
+        console.log('adding route: ' + route.address);
+        switch (route.method) {
+            case 'GET':
+                router.get(route.address, (req, res) => {
+                    res.send(res.sendFile(serverConfig.projectAddress + '/' + route.response));
+                });
+                break;
+            default:
+                router.get(route.address, (req, res) => {
+                    res.send(res.sendFile(serverConfig.projectAddress + '/' + route.response));
+                });
+        }
     });
 
     // apply the routes to our application
