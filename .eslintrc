@@ -66,4 +66,4 @@ rules:
     comma-spacing: [2, {before: false, after: true}]
     comma-style: [2, "last"]
     key-spacing: [2, {beforeColon: false, afterColon: true}]
-    indent: 4
+    indent: 2
