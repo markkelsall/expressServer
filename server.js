@@ -17,12 +17,12 @@ exports.start = (serverConfig) => {
         switch (route.method) {
             case 'GET':
                 router.get(route.address, (req, res) => {
-                    res.send(res.sendFile(serverConfig.projectAddress + '/' + route.response));
+                    res.sendFile(serverConfig.projectAddress + '/' + route.response);
                 });
                 break;
             default:
                 router.get(route.address, (req, res) => {
-                    res.send(res.sendFile(serverConfig.projectAddress + '/' + route.response));
+                    res.sendFile(serverConfig.projectAddress + '/' + route.response);
                 });
         }
     });
