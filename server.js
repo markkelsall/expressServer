@@ -6,8 +6,12 @@ module.exports = class Server {
 
     constructor (serverConfig = {}) {
         let port = serverConfig.port || 8080;
-        let address = serverConfig.address || '/';
         let routes = serverConfig.routes;
+        let address = '/';
+
+        if (serverConfig.address) {
+            address += serverConfig.address;
+        }
 
         this.instance = app.listen(port);
         console.log('Server started on: ' + port);
@@ -31,6 +35,8 @@ module.exports = class Server {
         } else {
             console.log('no routes added');
         }
+
+        app.use(address, router);
     }
 
     getInstance () {

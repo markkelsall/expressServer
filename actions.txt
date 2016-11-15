@@ -1,4 +1,4 @@
-add test framework for node
+add logging framework
 learn how to create node services
 learn how to query CB
 see if motion detection device can send message to url
