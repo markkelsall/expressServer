@@ -17,11 +17,6 @@ describe('Server', function() {
         assert.equal(serverInstance.getInstance().address().port, '8080');
         done();
     });
-    it('should start an instance with a default address of / if one is not provided', function(done) {
-        serverInstance = new Server();
-        assert.equal(serverInstance.getInstance().address().address, '::');
-        done();
-    });
     it('should start an instance on the port provided', function(done) {
         serverInstance = new Server(serverConfig);
         assert.equal(serverInstance.getInstance().address().port, '8000');

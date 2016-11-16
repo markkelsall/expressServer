@@ -2,6 +2,12 @@ const express = require('express');
 
 const app = express();
 let router = express.Router();
+
+const RESPONSE_TYPE = {
+    html: 'html',
+    json: 'json'
+};
+
 module.exports = class Server {
 
     constructor (serverConfig = {}) {
@@ -22,9 +28,15 @@ module.exports = class Server {
                 console.log('adding route: ' + route.address);
                 switch (route.method) {
                 case 'GET':
-                    router.get(route.address, (req, res) => {
-                        res.sendFile(serverConfig.projectAddress + '/' + route.response);
-                    });
+                    if (route.responseType === RESPONSE_TYPE.html) {
+                        router.get(route.address, (req, res) => {
+                            res.sendFile(serverConfig.projectAddress + '/' + route.response);
+                        });
+                    } else {
+                        router.get(route.address, (req, res) => {
+                            res.json(route.action());
+                        });
+                    }
                     break;
                 default:
                     router.get(route.address, (req, res) => {
@@ -32,8 +44,6 @@ module.exports = class Server {
                     });
                 }
             });
-        } else {
-            console.log('no routes added');
         }
 
         app.use(address, router);
@@ -44,7 +54,6 @@ module.exports = class Server {
     }
 
     close () {
-        console.log('server closed');
         this.getInstance().close();
     }
 };
