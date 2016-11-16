@@ -4,8 +4,7 @@ let request = require('supertest');
 
 let serverInstance;
 let serverConfig = {
-    port: 8000,
-    address: 'test'
+    port: 8000
 };
 
 describe('Server', function() {
