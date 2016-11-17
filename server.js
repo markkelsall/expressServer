@@ -1,15 +1,15 @@
 const express = require('express');
-
-const app = express();
-let router = express.Router();
+const logger = require('./logger');
 
 const RESPONSE_TYPE = {
     html: 'html',
     json: 'json'
 };
 
-module.exports = class Server {
+const app = express();
+let router = express.Router();
 
+module.exports = class Server {
     constructor (serverConfig = {}) {
         let port = serverConfig.port || 8080;
         let routes = serverConfig.routes;
@@ -20,12 +20,12 @@ module.exports = class Server {
         }
 
         this.instance = app.listen(port);
-        console.log('Server started on: ' + port);
-        console.log('app address: ' + address);
+        logger.debug('Server started on: ' + port);
+        logger.debug('app address: ' + address);
 
         if (routes) {
             routes.forEach((route) => {
-                console.log('adding route: ' + route.address);
+                logger.debug('adding route: ' + route.address);
                 switch (route.method) {
                 case 'GET':
                     if (route.responseType === RESPONSE_TYPE.html) {
